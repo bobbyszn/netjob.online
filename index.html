@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Editorial Analyst Program</title>
+    <link rel="shortcut icon" href="netflix-logo.webp" type="image/x-icon">
+    <style>
+        /* --- Reset & Basic Styles --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* --- Branding Colors --- */
+        :root {
+            --netflix-red: #E50914;
+            --netflix-dark: #141414;
+            --netflix-gray: #303030;
+        }
+
+        /* --- Header --- */
+        header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 28px 4%; /* Netflix style spacing */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+        }
+
+        .logo {
+            color: var(--netflix-red);
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .btn-signin {
+            background-color: var(--netflix-red);
+            color: white;
+            padding: 7px 17px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 3px; /* Netflix buttons are sharp/slightly rounded */
+            text-decoration: none;
+            border: none;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            /* Cinema background with heavy vignette */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1574375927938-d5a98e8efe85?q=80&w=2069&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-bottom: 8px solid #222;
+        }
+
+        /* The dark gradient overlay specific to Netflix */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 90%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        p.subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        p.description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* --- The Email Form CTA --- */
+        .email-form {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            max-width: 700px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .email-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 16px;
+            font-size: 1rem;
+            background: rgba(22, 22, 22, 0.7);
+            border: 1px solid #555;
+            border-radius: 4px;
+            color: white;
+        }
+        
+        .email-input::placeholder { color: #aaa; }
+
+        .btn-cta {
+            background-color: var(--netflix-red);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.5rem;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s;
+        }
+
+        .btn-cta:hover {
+            background-color: #f40612;
+        }
+
+        /* --- Info Section (The "TV" Effect) --- */
+        .section {
+            padding: 70px 45px;
+            background: #000;
+            border-bottom: 8px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-text { flex: 1; }
+        .section-media { flex: 1; position: relative; }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .section-text p {
+            font-size: 1.5rem;
+        }
+
+        /* --- FAQ Style Section --- */
+        .faq-section {
+            padding: 70px 45px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: #2d2d2d;
+            margin-bottom: 8px;
+            padding: 20px;
+            text-align: left;
+            font-size: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .faq-item:hover { background-color: #414141; }
+        .plus { font-size: 2rem; font-weight: 100; }
+
+        /* --- Footer --- */
+        footer {
+            padding: 70px 45px;
+            color: #737373;
+            font-size: 0.9rem;
+            background: #000;
+        }
+
+        footer a { color: #737373; text-decoration: none; margin-right: 20px;}
+        footer a:hover { text-decoration: underline; }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 950px) {
+            .section { flex-direction: column; text-align: center; }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 2rem; }
+            .btn-cta { font-size: 1rem; width: 100%; justify-content: center; margin-top: 10px;}
+            .email-input { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">NETFLIX</div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Unlimited movies, TV shows and a paycheck.</h1>
+            <p class="subtitle">Join the Creative Editorial Team.</p>
+            <p class="description">Ready to review? Enter your email to start your application.</p>
+            
+            <form class="email-form" onsubmit="event.preventDefault(); window.location.href='https://gloffers.org/aff_c?offer_id=973&aff_id=158919'">
+                <input type="email" class="email-input" placeholder="Email address" required>
+                <button type="submit" class="btn-cta">
+                    Get Started <span style="font-size: 1rem;">&#10095;</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-text">
+            <h2>Watch on your TV.</h2>
+            <p>Stream new releases before anyone else. Analyze video quality, subtitles and metadata accuracy from your smart TV, PlayStation, Xbox, Chromecast, Apple TV and more.</p>
+        </div>
+        <div class="section-media">
+            <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?q=80&w=2070&auto=format&fit=crop" style="width: 100%; border-radius: 10px; opacity: 0.8;" alt="TV">
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-text">
+            <h2>Tag profiles for kids.</h2>
+            <p>Help us build a safe viewing environment. Review content maturity ratings and categorize characters for the Netflix Kids experience.</p>
+        </div>
+        <div class="section-media">
+            <img src="parental-controls-on-netflix-65037dd346322-1024x683.webp" style="width: 100%; border-radius: 10px;" alt="Mobile">
+        </div>
+    </div>
+</body>
+</html>
